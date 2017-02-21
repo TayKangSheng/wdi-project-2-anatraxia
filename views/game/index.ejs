@@ -1,0 +1,14 @@
+<div class="container">
+  <h1 class="page-header">Games</h1>
+
+<ul class="list-group">
+  <% games.forEach(function (gameItem) { %>
+    <li class="list-group-item">
+      <strong>
+      <img src=<%= gameItem.gameCover %> width=100><br>
+      <%= gameItem.name %>:   <%= gameItem.publisher %> </strong><br>
+      Game Type: <%= gameItem.type %><br>
+    </li>
+  <% }) %>
+</ul>
+</div>

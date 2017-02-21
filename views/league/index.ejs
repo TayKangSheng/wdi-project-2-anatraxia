@@ -5,8 +5,10 @@
   <% leagues.forEach(function (leagueItem) { %>
     <li class="list-group-item">
       <strong>
-      <%= leagueItem.name %>: </strong><br>
-      <a class="pull-right" href=<%= "/league/" + leagueItem._id %>>View</a>
+      League Name : <%= leagueItem.name %></strong><br>
+      <strong>
+      Organizer : <%= leagueItem.organizer %></strong><br>
+      <a href=<%= "/league/" + leagueItem._id %>>View</a>
     </li>
   <% }) %>
 </ul>

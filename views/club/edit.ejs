@@ -6,18 +6,6 @@
       <input type="text" name="name" class="form-control" id="nameInput" value="<%= clubItem.name %>">
     </div>
     <div class="form-group">
-      <label for="Name">Home Kit Color :</label>
-      <input type="text" name="homeKitColor" class="form-control" id="homekitInput" value="<%= clubItem.homeKitColor %>">
-    </div>
-    <div class="form-group">
-      <label for="Name">Away Kit Color :</label>
-      <input type="text" name="awayKitColor" class="form-control" id="awayitInput" value="<%= clubItem.awayKitColor %>">
-    </div>
-    <div class="form-group">
-      <label for="Name">Third Kit Color :</label>
-      <input type="text" name="thirdKitColor" class="form-control" id="thirdkitInput" value="<%= clubItem.thirdKitColor %>">
-    </div>
-    <div class="form-group">
       <label for="Name">Team Badge:</label>
       <input type="text" name="teamBadge" class="form-control" id="teamBadgeInput" value="<%= clubItem.teamBadge %>">
     </div>
@@ -32,6 +20,17 @@
     <div class="form-group">
       <label for="Name">Manager's mobile:</label>
       <input type="text" name="managerMobile" class="form-control" id="managerMobile" value="<%= clubItem.manager.mobile %>">
+    </div>
+    <div class="form-group">
+      <label for="League">League:</label>
+      <% leagues.forEach(league => {%>
+        <div class="checkbox">
+        <label>
+        <input type="checkbox" name="leaguePlaying[<%= league.id%>]">
+        <%=league.name%>
+        </label>
+        </div>
+        <%})%>
     </div>
 
     <button type="submit" class="btn btn-default">Submit</button>

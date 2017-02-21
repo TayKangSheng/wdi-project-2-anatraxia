@@ -7,26 +7,22 @@ var playerSchema = new mongoose.Schema({
     type: String,
     required: [ true, "Please fill up the player's name"]
   },
-  address: {
-    type: String,
-    required: [ true, "Please fill up the player's address"]
-  },
   dob: { type: Date, default: Date.now },
   gender: {
     type: String,
     required: [ true, "Please fill up the player's gender"]
   },
-  position: String,
+  gamePlayed: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Game' }],
   email: {type: String,
     required: true,
     unique: true,
     lowercase: true,
     match: emailRegex},
   mobile: { type: Number, required: [ true, "Please fill up the player's mobile no."] },
-  status: {
+  membership: {
     type: String,
-    enum: ['injured', 'fit'],
-    default: 'fit'
+    enum: ['member', 'elder'],
+    default: 'member'
   },
   isTeamCaptain: {type: String,
   enum: ['Yes', 'No'],

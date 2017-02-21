@@ -1,4 +1,5 @@
 let League = require('../models/league')
+let Game = require('../models/game')
 
 let leagueController = {
   list: (req, res) => {
@@ -9,7 +10,10 @@ let leagueController = {
   },
 
   new: (req, res) => {
-    res.render('league/new')
+    Game.find({}, (err, games) => {
+      if (err) throw err
+      res.render('league/new', {games: games})
+    })
   },
 
   listOne: (req, res) => {
@@ -28,12 +32,19 @@ let leagueController = {
   },
 
   create: (req, res) => {
+    var arrOfChosenIds = []
+    for (var id in req.body.game) {
+      arrOfChosenIds.push(id)
+    }
     League.create({
       name: req.body.name,
-      day: req.body.day,
+      venue: req.body.venue,
       time: req.body.time,
       startDate: req.body.startDate,
       endDate: req.body.endDate,
+      prizeMoney: Number(req.body.prizeMoney),
+      maxClub: Number(req.body.maxClub),
+      game: arrOfChosenIds,
       organizer: req.body.organizer,
       organizerEmail: req.body.organizerEmail,
       organizerContact: req.body.organizerContact
@@ -43,20 +54,30 @@ let leagueController = {
     })
   },
   edit: (req, res) => {
-    League.findById(req.params.id, (err, leagueEdit) => {
+    League.findById(req.params.id, (err, leagueItem) => {
       if (err) throw err
-      res.render('league/edit', { leagueEdit: leagueEdit })
+      Game.find({}, (err, games) => {
+        if (err) throw err
+        res.render('league/edit', {games: games, leagueItem: leagueItem})
+      })
     })
   },
   update: (req, res) => {
+    var arrOfChosenIds = []
+    for (var id in req.body.game) {
+      arrOfChosenIds.push(id)
+    }
     League.findOneAndUpdate({
       id: req.params._id
     }, {
       name: req.body.name,
-      day: req.body.day,
+      venue: req.body.venue,
       time: req.body.time,
       startDate: req.body.startDate,
       endDate: req.body.endDate,
+      prizeMoney: Number(req.body.prizeMoney),
+      maxClub: Number(req.body.maxClub),
+      game: arrOfChosenIds,
       organizer: req.body.organizer,
       organizerEmail: req.body.organizerEmail,
       organizerContact: req.body.organizerContact

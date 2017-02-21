@@ -6,12 +6,6 @@ var clubSchema = new mongoose.Schema({
     type: String,
     required: [ true, "Please fill up the club's name"]
   },
-  homeKitColor: {type: String,
-    required: [ true, "Please fill up the club's home kit color"]},
-  awayKitColor: {type: String,
-    required: [ true, "Please fill up the club's away kit color"]},
-  thirdKitColor: {type: String,
-    required: [ true, "Please fill up the club's third kit color"]},
   teamBadge: {type: String,
     required: [ true, "Please fill up the club's team badge"]},
   manager: {
@@ -22,9 +16,8 @@ var clubSchema = new mongoose.Schema({
       lowercase: true,
       match: emailRegex },
     mobile: { type: Number, required: [ true, "Please fill up the manager's mobile no."] }
-  }
-  //,
-  //leaguePlaying: [{ type: mongoose.Schema.Types.ObjectId, ref: 'League' }]
+  },
+  leaguePlaying: [{ type: mongoose.Schema.Types.ObjectId, ref: 'League' }]
 })
 
 var Club = mongoose.model('Club', clubSchema)

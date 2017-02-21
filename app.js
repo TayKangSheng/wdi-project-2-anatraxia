@@ -10,7 +10,7 @@ const methodOverride = require('method-override')
 // const passport = require('./config/ppConfig')
 const flash = require('connect-flash')
 
-mongoose.connect('mongodb://localhost/kakiBola')
+mongoose.connect('mongodb://localhost/gamerKakis')
 
 mongoose.Promise = global.Promise
 // process.env.SESSION_SECRET = 'hahaha'
@@ -28,7 +28,7 @@ mongoose.Promise = global.Promise
 
 app.use(methodOverride('_method'))
 
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(flash())
 
@@ -40,6 +40,7 @@ app.set('view engine', 'ejs')
 
 app.use('/club', require('./routes/club_routes'))
 app.use('/league', require('./routes/league_routes'))
+app.use('/game', require('./routes/game_routes'))
 // app.use('/auth', require('./routes/user_router'))
 
 // app.get('/', (req, res) => {
@@ -57,5 +58,5 @@ app.get('/', (req, res) => {
 // })
 const port = 4000
 app.listen(port, function () {
-  console.log('Kaki Bola App is running on ' + port)
+  console.log('Gamer Kakis App is running on ' + port)
 })
