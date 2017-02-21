@@ -1,0 +1,41 @@
+<%# FIRST PART: THE FORM %>
+<form method="post" action="/league">
+  <div class="row">
+    <h2>Add A League</h2>
+    <div class="form-group">
+      <label for="leagueName">League Name:</label>
+      <input type="text" class="form-control" name="name" id="name" placeholder="League Name">
+      </div>
+    <div class="form-group">
+      <label for="day">League Day:</label>
+      <input type="text" class="form-control" name="day" id="day" placeholder="day">
+    </div>
+    <div class="form-group">
+      <label for="time">League Time:</label>
+      <input type="text" class="form-control" name="time" id="time" placeholder="time">
+    </div>
+    <div class="form-group">
+      <label for="startDate">League Start Date:</label>
+      <input type="date" class="form-control" name="startDate" id="startDate" placeholder="Start Date">
+    </div>
+    <div class="form-group">
+      <label for="endDate">League End Date:</label>
+      <input type="date" class="form-control" name="endDate" id="endDate" placeholder="End Date">
+    </div>
+    <div class="form-group">
+      <label for="organizer">Organizer Name:</label>
+      <input type="text" class="form-control" name="organizer" id="organizer" placeholder="Organizer Name">
+    </div>
+      <div class="form-group">
+        <label for="organizerEmail">Organizer's email:</label>
+        <input type="email" class="form-control" name="organizerEmail" id="organizerEmail" placeholder="a@bc.com">
+      </div>
+      <div class="form-group">
+        <label for="organizerContact">Organizer's Contact:</label>
+        <input type="text" class="form-control" name="organizerContact" id="organizerContact" placeholder="Organizer's Contact">
+      </div>
+    <div class="form-group ">
+      <button type="submit" class="btn btn-default">Add a League</button>
+    </div>
+  </div>
+</form>

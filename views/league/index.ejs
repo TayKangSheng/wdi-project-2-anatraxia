@@ -1,0 +1,14 @@
+<div class="container">
+  <h1 class="page-header">League</h1>
+
+<ul class="list-group">
+  <% leagues.forEach(function (leagueItem) { %>
+    <li class="list-group-item">
+      <strong>
+      <%= leagueItem.name %>: </strong><br>
+      <a class="pull-right" href=<%= "/league/" + leagueItem._id %>>View</a>
+    </li>
+  <% }) %>
+</ul>
+
+</div>

@@ -1,0 +1,29 @@
+{
+  "name": "wdi-project-2-anatraxia",
+  "version": "1.0.0",
+  "description": "This is the starter code for WDI projects. Please update this README file with information specific to your project. Replace this paragraph for instance, with a short description of your project. Then update the sections below. Refer to your project specificaion for instructions on how to submit your projects.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wdi-sg/wdi-project-2-anatraxia.git"
+  },
+  "author": "Iskandar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wdi-sg/wdi-project-2-anatraxia/issues"
+  },
+  "homepage": "https://github.com/wdi-sg/wdi-project-2-anatraxia#readme",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "connect-flash": "^0.1.1",
+    "express": "^4.14.1",
+    "method-override": "^2.3.7",
+    "mongoose": "^4.8.4",
+    "nodemon": "^1.11.0",
+    "path": "^0.12.7"
+  }
+}

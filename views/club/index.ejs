@@ -1,0 +1,15 @@
+<div class="container">
+  <h1 class="page-header">Club</h1>
+
+<ul class="list-group">
+  <% clubs.forEach(function (clubItem) { %>
+    <li class="list-group-item">
+      <strong>
+      <img src=<%= clubItem.teamBadge %> width=100><br>
+      <%= clubItem.name %>: </strong><br>
+      <a class="pull-right" href=<%= "/club/" + clubItem._id %>>View</a>
+    </li>
+  <% }) %>
+</ul>
+
+</div>
