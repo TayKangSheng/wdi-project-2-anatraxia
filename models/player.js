@@ -1,4 +1,5 @@
 var mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
 
 const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 
@@ -13,12 +14,20 @@ var playerSchema = new mongoose.Schema({
     required: [ true, "Please fill up the player's gender"]
   },
   gamePlayed: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Game' }],
-  email: {type: String,
-    required: true,
-    unique: true,
-    lowercase: true,
-    match: emailRegex},
-  mobile: { type: Number, required: [ true, "Please fill up the player's mobile no."] },
+  local: {
+    email: {type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      match: emailRegex},
+    password: {
+      type: String,
+      required: [true, 'Please fill up the password']
+    }
+  },
+  mobile: {
+     type: Number,
+     required: [ true, "Please fill up the player's mobile no."] },
   membership: {
     type: String,
     enum: ['member', 'elder'],
@@ -35,6 +44,14 @@ playerSchema.virtual('age').get(function () {
   var age = todayDate.getFullYear() - this.dob.getFullYear()
   return age
 })
+
+playerSchema.statics.encrypt = function (password) {
+ return bcrypt.hashSync(password, 10)
+}
+
+playerSchema.methods.validPassword = function(givenpassword){
+  return bcrypt.compareSync(givenpassword,this.local.password)
+}
 
 var Player = mongoose.model('Player', playerSchema)
 

@@ -4,13 +4,15 @@ const playerController = require('../controllers/player_controller')
 
 router.get('/', playerController.list)
 
-router.get('/new', playerController.new)
-
-router.get('/:id', playerController.listOne)
-
 router.get('/:id/edit', playerController.edit)
 
-router.post('/', playerController.create)
+router.get('/signup', playerController.renderSignup)
+
+router.get('/login', playerController.renderLogin)
+
+router.post('/signup', playerController.signup)
+
+router.post('/login', playerController.login)
 
 router.put('/:id', playerController.update)
 

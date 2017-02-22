@@ -1,17 +1,14 @@
 let Player = require('../models/player')
+let Game = require('../models/game')
+
+const passport = require('passport')
 
 let playerController = {
+
   list: (req, res) => {
     Player.find({}, (err, players) => {
       if (err) throw err
       res.render('player/index', { players: players })
-    })
-  },
-
-  new: (req, res) => {
-    Player.find({completed: false}, function (err, newPlayer) {
-      if (err) throw err
-      res.render('player/new', { newPlayer: newPlayer })
     })
   },
 
@@ -23,22 +20,30 @@ let playerController = {
       res.render('player/show', { playerInfo: playerInfo })
     })
   },
-
-  create: (req, res) => {
-    Player.create({
-      name: req.body.name,
-      address: req.body.address,
-      dob: req.body.dob,
-      gender: req.body.gender,
-      position: req.body.position,
-      email: req.body.email,
-      mobile: req.body.mobile,
-      status: req.body.status,
-      club: req.body.club.id
-    }, function (err, group) {
+  renderSignup: (req, res) => {
+    Game.find({}, (err, games) => {
       if (err) throw err
-      res.redirect('/player')
+      res.render('player/signup', {games: games, flash: req.flash('flash')[0]})
     })
+  },
+  renderLogin: (req, res) => {
+    res.render('player/login', {flash: req.flash('flash')[0]})
+  },
+  signup: (req, res, done) => {
+    var playerSignupStrategy = passport.authenticate('local-playerSignup', {
+      successRedirect: '/',
+      failureRedirect: '/player/signup',
+      failureFlash: false
+    })
+    return playerSignupStrategy(req, res, done)
+  },
+  login: (req, res, done) => {
+    var playerLoginStrategy = passport.authenticate('local-playerLogin', {
+      successRedirect: '/',
+      failureRedirect: '/player/login',
+      failureFlash: false
+    })
+    return playerLoginStrategy(req, res, done)
   },
   edit: (req, res) => {
     Player.findById(req.params.id, (err, playerEdit) => {

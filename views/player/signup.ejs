@@ -1,0 +1,44 @@
+<%- include('../partials/flash') %>
+<form method="post" action="/player/signup">
+  <div class="row">
+    <h2>Join As A Player</h2>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" name="email" id="email" placeholder="a@bc.com">
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control" name="password" id="password" placeholder="xxxxx">
+    </div>
+    <div class="form-group">
+      <label for="name">Name :</label>
+      <input type="text" class="form-control" name="name" id="name" placeholder="Player Name">
+      </div>
+    <div class="form-group">
+      <label for="dob">DOB :</label>
+      <input type="date" class="form-control" name="dob" id="dob" placeholder="date of birth">
+    </div>
+      <div class="form-group">
+        <label for="teamBadge">Gender : </label>
+        <input type="text" class="form-control" name="gender" id="gender" placeholder="Male /  Female">
+      </div>
+      <div class="form-group">
+        <label for="gamePlayed">Game Played:</label>
+        <% games.forEach(game => {%>
+          <div class="checkbox">
+          <label>
+          <input type="checkbox" name="gamePlayed[<%= game.id%>]">
+          <%=game.name%>
+          </label>
+          </div>
+          <%})%>
+      </div>
+      <div class="form-group">
+        <label for="managerMobile">Mobile:</label>
+        <input type="text" class="form-control" name="mobile" id="mobile" placeholder="mobile no.">
+      </div>
+    <div class="form-group ">
+      <button type="submit" class="btn btn-default">Join</button>
+    </div>
+  </div>
+</form>
