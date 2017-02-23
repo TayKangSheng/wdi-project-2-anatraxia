@@ -1,0 +1,16 @@
+<div class="container">
+  <h1 class="page-header">Clan</h1>
+
+<ul class="list-group">
+  <% clans.forEach(function (clanItem) { %>
+    <li class="list-group-item">
+      <strong>
+      <img src=<%= clanItem.clanBanner %> width=100><br>
+      <%= clanItem.name %></strong><br>
+      <a class="btn btn-link" href=<%= "/clan/" + clanItem._id %>>View</a>
+      <a class="btn btn-link" href=<%= "/clan/" + clanItem._id %>>View</a>
+    </li>
+  <% }) %>
+</ul>
+
+</div>

@@ -1,33 +1,33 @@
-let League = require('../models/league')
+let Tournament = require('../models/tournament')
 let Game = require('../models/game')
 
-let leagueController = {
+let tournamentController = {
   list: (req, res) => {
-    League.find({}, (err, leagues) => {
+    Tournament.find({}, (err, tournaments) => {
       if (err) throw err
-      res.render('league/index', { leagues: leagues })
+      res.render('tournament/index', { tournaments: tournaments })
     })
   },
 
   new: (req, res) => {
     Game.find({}, (err, games) => {
       if (err) throw err
-      res.render('league/new', {games: games})
+      res.render('tournament/new', {games: games})
     })
   },
 
   listOne: (req, res) => {
-    League.findById(req.params.id, (err, leagueItem) => {
+    Tournament.findById(req.params.id, (err, tournamentItem) => {
       if (err) throw err
-      res.render('league/single_league', { leagueItem: leagueItem })
+      res.render('tournament/single_tournament', { tournamentItem: tournamentItem })
     })
   },
 
   show: (req, res) => {
-    League.findById(req.params.id)
-    .exec((err, leagueInfo) => {
+    Tournament.findById(req.params.id)
+    .exec((err, tournamentInfo) => {
       if (err) throw err
-      res.render('league/show', { leagueInfo: leagueInfo })
+      res.render('tournament/show', { tournamentInfo: tournamentInfo })
     })
   },
 
@@ -36,7 +36,7 @@ let leagueController = {
     for (var id in req.body.game) {
       arrOfChosenIds.push(id)
     }
-    League.create({
+    Tournament.create({
       name: req.body.name,
       venue: req.body.venue,
       time: req.body.time,
@@ -50,15 +50,15 @@ let leagueController = {
       organizerContact: req.body.organizerContact
     }, function (err, group) {
       if (err) throw err
-      res.redirect('/league')
+      res.redirect('/tournament')
     })
   },
   edit: (req, res) => {
-    League.findById(req.params.id, (err, leagueItem) => {
+    Tournament.findById(req.params.id, (err, tournamentItem) => {
       if (err) throw err
       Game.find({}, (err, games) => {
         if (err) throw err
-        res.render('league/edit', {games: games, leagueItem: leagueItem})
+        res.render('tournament/edit', {games: games, tournamentItem: tournamentItem})
       })
     })
   },
@@ -67,7 +67,7 @@ let leagueController = {
     for (var id in req.body.game) {
       arrOfChosenIds.push(id)
     }
-    League.findOneAndUpdate({
+    Tournament.findOneAndUpdate({
       id: req.params._id
     }, {
       name: req.body.name,
@@ -81,18 +81,18 @@ let leagueController = {
       organizer: req.body.organizer,
       organizerEmail: req.body.organizerEmail,
       organizerContact: req.body.organizerContact
-    }, (err, leagueUpdated) => {
+    }, (err, tournamentUpdated) => {
       if (err) throw err
-      res.redirect('/league/' + leagueUpdated.id)
+      res.redirect('/tournament/' + tournamentUpdated.id)
     })
   },
 
   delete: (req, res) => {
-    League.findByIdAndRemove(req.params.id, (err, leagueRemoved) => {
+    Tournament.findByIdAndRemove(req.params.id, (err, tournamentRemoved) => {
       if (err) throw err
-      res.redirect('/league')
+      res.redirect('/tournament')
     })
   }
 
 }
-module.exports = leagueController
+module.exports = tournamentController

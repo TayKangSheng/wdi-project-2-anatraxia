@@ -21,7 +21,7 @@ app.use(express.static('public'))
 app.use(cookieParser(process.env.SESSION_SECRET))
 app.use(session({
   secret: process.env.SESSION_SECRET,
-  cookie: { maxAge: 60000 },
+  cookie: { maxAge: 600000 },
   resave: false,
   saveUninitialized: true,
   store: new MongoStore({
@@ -45,11 +45,16 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(ejsLayouts)
 
-
 app.set('view engine', 'ejs')
 
-app.use('/club', require('./routes/club_routes'))
-app.use('/league', require('./routes/league_routes'))
+app.use(function (req, res, next) {
+  res.locals.user = req.user
+  res.locals.isAuthenticated = req.isAuthenticated()
+  next()
+})
+
+app.use('/clan', require('./routes/clan_routes'))
+app.use('/tournament', require('./routes/tournament_routes'))
 app.use('/player', require('./routes/player_routes'))
 app.use('/game', require('./routes/game_routes'))
 

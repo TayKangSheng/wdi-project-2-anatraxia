@@ -1,0 +1,29 @@
+<%# FIRST PART: THE FORM %>
+<form method="post" action="/clan/new">
+  <div class="row">
+    <h2>Add a new Clan</h2>
+    <div class="form-group">
+      <label for="clubName">Clan Name:</label>
+      <input type="text" class="form-control" name="name" id="name" placeholder="Clan Name">
+      </div>
+      <div class="form-group">
+        <label for="clanBanner">Clan Banner:</label>
+        <input type="text" class="form-control" name="clanBanner" id="clanBanner" placeholder="URL for Clan Banner">
+        <input type="hidden" class="form-control" name="clanLeaderId" id="clanLeaderId" value="<%= user.id %>">
+      </div>
+      <div class="form-group">
+        <label for="gamePlayed">Game Played:</label>
+        <% games.forEach(game => {%>
+          <div class="checkbox">
+          <label>
+          <input type="checkbox" name="gamePlayed[<%= game.id%>]">
+          <%=game.name%>
+          </label>
+          </div>
+          <%})%>
+      </div>
+    <div class="form-group ">
+      <button type="submit" class="btn btn-default">Add a Clan</button>
+    </div>
+  </div>
+</form>

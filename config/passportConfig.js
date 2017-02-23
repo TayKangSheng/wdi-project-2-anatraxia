@@ -1,10 +1,9 @@
 var LocalStrategy = require('passport-local').Strategy
-//const Club = require('../models/club')
+const Clan = require('../models/clan')
 const Player = require('../models/player')
 //const Player = require('../models/player')
 
 module.exports = function (passport) {
-
   passport.serializeUser(function (user, done) {
     done(null, user.id)
   })
@@ -13,7 +12,6 @@ module.exports = function (passport) {
       done(err, user)
     })
   })
-
   passport.use('local-playerLogin', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
@@ -42,42 +40,42 @@ module.exports = function (passport) {
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
-  }, function (req, email, password, done) {
-
-   // Find Player with email as given from the callback
-    Player.findOne({ 'local.email': email }, function (err, foundPlayer) {
-     // if there's a user with the email
-     // call next() middleware with no error arguments + update the flash data
-
-      if (foundPlayer) {
+    },
+    function(req, email, password, done){
+       // Find Player with email as given from the callback
+       Player.findOne({ 'local.email': email }, function (err, foundPlayer) {
+       // if there's a user with the email
+       // call next() middleware with no error arguments + update the flash data
+       if (foundPlayer) {
         console.log('the same user with same email found')
         return done(null, false, req.flash('flash', {
           type: 'warning',
           message: 'This email is already used'
         }))
-      } else {
-        var arrOfChosenIds = []
-        for (var id in req.body.gamePlayed) {
-          arrOfChosenIds.push(id)
-        }
-        let newPlayer = new Player({
+       }
+       else {
+          var arrOfChosenIds = []
+            for (var id in req.body.gamePlayed) {
+              arrOfChosenIds.push(id)
+            }
+          let newPlayer = new Player({
           local: {
             email: email,
             password: Player.encrypt(password)
-          },
-          name: req.body.name,
-          gamePlayed: arrOfChosenIds,
-          dob: req.body.dob,
-          gender: req.body.gender,
-          mobile: req.body.mobile
-        })
-        newPlayer.save(function (err, output) {
-          return done(null, output, req.flash('flash', {
+           },
+           name: req.body.name,
+           gamePlayed: arrOfChosenIds,
+           dob: req.body.dob,
+           gender: req.body.gender,
+           mobile: req.body.mobile
+          })
+          newPlayer.save(function (err, output) {
+            return done(null, output, req.flash('flash', {
             type: 'success',
             message: 'Welcome to Gamer Kakis ' + newPlayer.name
-          }))
-        })
-      }
-    })
+            }))
+          })
+        }
+     })
   }))
 }

@@ -1,0 +1,41 @@
+<div class="container">
+  <h1 class="page-header"></h1>
+
+  <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><img src=<%= clanInfo.clanBanner %> width=50> <%= clanInfo.name %> Clan Details</h3>
+  </div>
+  <div class="panel-body">
+    <span class="glyphicon-class"><strong>Clan Leader : </strong><%=clanInfo.clanLeaderId.name %></span><br>
+    <span class="glyphicon-class"><strong>Clan Leader's Contact : </strong><%=clanInfo.clanLeaderId.mobile %></span><br>
+    <ul class="list-group">
+    <span class="glyphicon-class"><strong>Focus Games : </strong>
+    <% clanInfo.gamePlayed.forEach(function(gameItem) {%>
+      <li class="list-group-item">
+      <%=gameItem.name%>
+      </li>
+    <%})%>
+    </ul>
+    <ul class="list-group">
+    <span class="glyphicon-class"><strong>Member List : </strong>
+    <% clanInfo.clanMembers.forEach(function(memberItem) {%>
+      <li class="list-group-item">
+      <%=memberItem.name%>
+      </li>
+    <%})%>
+    </ul>
+  <div class="btn-group" role="group">
+    <span>
+  <form class="addMemberForm "method="POST" action=<%= "/clan/AddMember/" + clanInfo._id + "?_method=PUT" %>>
+    <input type="hidden" class="form-control" name="playerID" id="playerID" value="<%= user.id %>">
+    <button type="submit" class="btn btn-primary">Join Clan</button>
+  </form>
+    <a class="btn btn-warning" href=<%= "/clan/" + clanInfo._id + "/edit" %>>Edit Clan Details</a>
+    <form class="deleteForm "method="POST" action=<%= "/clan/" + clanInfo._id + "?_method=DELETE" %>>
+      <button type="submit" class="btn btn-danger">Remove Clan</button>
+    </form>
+  </span>
+    </div>
+  </div>
+</div>
+</div>
