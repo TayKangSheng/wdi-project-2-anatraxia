@@ -1,5 +1,4 @@
 let Clan = require('../models/clan')
-let Player = require('../models/player')
 let Tournament = require('../models/tournament')
 let Game = require('../models/game')
 
@@ -8,14 +7,6 @@ let clanController = {
     Clan.find({}, (err, clans) => {
       if (err) throw err
       res.render('clan/index', { clans: clans })
-    })
-  },
-
-  new: (req, res) => {
-    var currentDate = Date.now()
-    Game.find({}, (err, games) => {
-      if (err) throw err
-      res.render('clan/new', { games : games})
     })
   },
 
@@ -31,16 +22,26 @@ let clanController = {
     })
   },
 
+  new: (req, res) => {
+    Game.find({}, (err, games) => {
+      if (err) throw err
+      res.render('clan/new', { games : games})
+    })
+  },
+
   createClan: (req, res) => {
     var arrOfGamesIds = []
       for (var id in req.body.gamePlayed) {
         arrOfGamesIds.push(id)
       }
+    var arrOfMembersIds = []
+    arrOfMembersIds.push(req.body.clanLeaderId)
     Clan.create({
       name: req.body.name,
       clanBanner: req.body.clanBanner,
       clanLeaderId: req.body.clanLeaderId,
-      gamePlayed: arrOfGamesIds
+      gamePlayed: arrOfGamesIds,
+      clanMembers: arrOfMembersIds
     }, function (err, output) {
       if (err) console.log(err)
       res.redirect('/clan')

@@ -7,7 +7,7 @@
       <strong>
       <img src=<%= clanItem.clanBanner %> width=100><br>
       <%= clanItem.name %></strong><br>
-      <a class="btn btn-link" href=<%= "/clan/" + clanItem._id %>>View</a>
+      <strong>Total Members: </strong> <%= clanItem.totalMembers %><br>
       <a class="btn btn-link" href=<%= "/clan/" + clanItem._id %>>View</a>
     </li>
   <% }) %>

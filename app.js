@@ -21,7 +21,7 @@ app.use(express.static('public'))
 app.use(cookieParser(process.env.SESSION_SECRET))
 app.use(session({
   secret: process.env.SESSION_SECRET,
-  cookie: { maxAge: 600000 },
+  cookie: { maxAge: 3600000 },
   resave: false,
   saveUninitialized: true,
   store: new MongoStore({
@@ -36,7 +36,6 @@ require('./config/passportConfig')(passport)
 
 app.use(flash())
 
-app.use(methodOverride('_method'))
 app.use(logger('dev'))
 
 app.use(methodOverride('_method'))
@@ -53,14 +52,16 @@ app.use(function (req, res, next) {
   next()
 })
 
+app.get('/', (req, res) => {
+  res.render('homepage')
+})
+
 app.use('/clan', require('./routes/clan_routes'))
 app.use('/tournament', require('./routes/tournament_routes'))
 app.use('/player', require('./routes/player_routes'))
 app.use('/game', require('./routes/game_routes'))
 
-app.get('/', (req, res) => {
-  res.render('homepage')
-})
+
 
 // development error handler
 // will print stacktrace

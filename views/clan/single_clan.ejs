@@ -26,14 +26,19 @@
     </ul>
   <div class="btn-group" role="group">
     <span>
+  <%if (isAuthenticated && user.id!=clanInfo.clanLeaderId._id) { %>
   <form class="addMemberForm "method="POST" action=<%= "/clan/AddMember/" + clanInfo._id + "?_method=PUT" %>>
     <input type="hidden" class="form-control" name="playerID" id="playerID" value="<%= user.id %>">
     <button type="submit" class="btn btn-primary">Join Clan</button>
   </form>
-    <a class="btn btn-warning" href=<%= "/clan/" + clanInfo._id + "/edit" %>>Edit Clan Details</a>
-    <form class="deleteForm "method="POST" action=<%= "/clan/" + clanInfo._id + "?_method=DELETE" %>>
-      <button type="submit" class="btn btn-danger">Remove Clan</button>
-    </form>
+  <%} else if (isAuthenticated && user.id==clanInfo.clanLeaderId._id) {%>
+  <a class="btn btn-warning" href=<%= "/clan/" + clanInfo._id + "/edit" %>>Edit Clan Details</a>
+  <form class="deleteForm "method="POST" action=<%= "/clan/" + clanInfo._id + "?_method=DELETE" %>>
+    <button type="submit" class="btn btn-danger">Remove Clan</button>
+  </form>
+  <%} else {%>
+      <a class="btn btn-primary" href="/clan">Back to Clan List</a>
+  <%}%>
   </span>
     </div>
   </div>

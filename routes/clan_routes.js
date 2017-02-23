@@ -4,14 +4,13 @@ const clanController = require('../controllers/clan_controller')
 
 router.get('/', clanController.list)
 
+router.get('/new', clanController.new)
+
 router.get('/:id', clanController.show)
 
 router.get('/:id/edit', clanController.edit)
 
-router.get('/new', clanController.new)
-
 router.post('/new', clanController.createClan)
-
 
 router.put('/:id', clanController.update)
 

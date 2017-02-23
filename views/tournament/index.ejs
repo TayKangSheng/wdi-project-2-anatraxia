@@ -1,14 +1,14 @@
 <div class="container">
-  <h1 class="page-header">League</h1>
+  <h1 class="page-header">Tournament</h1>
 
 <ul class="list-group">
-  <% leagues.forEach(function (leagueItem) { %>
+  <% tournaments.forEach(function (tournamentItem) { %>
     <li class="list-group-item">
       <strong>
-      League Name : <%= leagueItem.name %></strong><br>
+      Tournament Name : <%= tournamentItem.name %></strong><br>
       <strong>
-      Organizer : <%= leagueItem.organizer %></strong><br>
-      <a href=<%= "/league/" + leagueItem._id %>>View</a>
+      Organizer : <%= tournamentItem.organizer %></strong><br>
+      <a href=<%= "/tournament/" + tournamentItem._id %>>View</a>
     </li>
   <% }) %>
 </ul>

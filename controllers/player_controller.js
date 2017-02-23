@@ -14,7 +14,7 @@ let playerController = {
 
   show: (req, res) => {
     Player.findById(req.params.id)
-    .populate('club')
+    .populate('cl')
     .exec((err, playerInfo) => {
       if (err) throw err
       res.render('player/show', { playerInfo: playerInfo })

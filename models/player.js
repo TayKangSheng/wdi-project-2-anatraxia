@@ -36,7 +36,7 @@ var playerSchema = new mongoose.Schema({
   isTeamCaptain: {type: String,
   enum: ['Yes', 'No'],
   default: 'No'},
-  club: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Club' }]
+  club: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Clan' }]
 })
 
 playerSchema.virtual('age').get(function () {
