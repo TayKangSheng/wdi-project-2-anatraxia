@@ -1,0 +1,54 @@
+<div class="container">
+  <h1 class="page-header"></h1>
+
+  <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"> Tournament Details</h3>
+  </div>
+  <div class="panel-body">
+    <span><strong>Tournament Name : </strong></span>
+    <span><%= tournamentItem.name %></span><br>
+    <span><strong>Tournament Date : </strong></span>
+    <span><%= tournamentItem.tournamentDate %></span><br>
+    <span><strong>Tournament Game : </strong></span>
+    <span><%= tournamentItem.game.name %></span><br>
+    <span><strong>Prize Money : </strong></span>
+    <span><%= tournamentItem.prizeMoney %></span><br>
+    <span><strong>Organizer Name: </strong></span>
+    <span><%= tournamentItem.organizer.name %></span><br>
+    <span><strong>Organizer Contact: </strong></span>
+    <span><%= tournamentItem.organizer.mobile %></span><br>
+    <ul class="list-group">
+    <span class="glyphicon-class"><strong>Gamers Joining: </strong>
+      <%var isGamer=false%>
+    <% tournamentItem.playerJoined.forEach(function(playerItem) {%>
+      <li class="list-group-item">
+      <%=playerItem.name%>
+      </li>
+        <%if(user.id == playerItem.id) { %>
+          <%isGamer=true%>
+        <% } %>
+    <%})%>
+    </ul>
+    <%if (isAuthenticated && !isGamer && user.id!= tournamentItem.organizer.id) { %>
+    <form class="addMemberForm "method="POST" action=<%= "/tournament/AddPlayer/" + tournamentItem.id + "?_method=PUT" %>>
+      <input type="hidden" class="form-control" name="playerID" id="playerID" value="<%= user.id %>">
+      <button type="submit" class="btn btn-primary">Join Tournament</button>
+    </form>
+    <%}%>
+    <%if (isAuthenticated && isGamer) { %>
+      <form class="addMemberForm "method="POST" action=<%= "/tournament/RemovePlayer/" + tournamentItem.id + "?_method=PUT" %>>
+        <input type="hidden" class="form-control" name="playerID" id="playerID" value="<%= user.id %>">
+        <button type="submit" class="btn btn-primary">Leave Tournament</button>
+      </form>
+    <%}%>
+    <% if (isAuthenticated && user.id==tournamentItem.organizer.id) {%>
+    <a class="btn btn-warning" href=<%= "/tournament/" + tournamentItem.id + "/edit" %>>Edit</a>
+    <form class="deleteForm "method="POST" action=<%= "/tournament/" + tournamentItem._id + "?_method=DELETE" %>>
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+    <%}%>
+      <a class="btn btn-primary" href="/tournament">Back to Tournament List</a>
+  </div>
+</div>
+</div>

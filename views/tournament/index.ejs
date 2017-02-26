@@ -4,10 +4,12 @@
 <ul class="list-group">
   <% tournaments.forEach(function (tournamentItem) { %>
     <li class="list-group-item">
+      <strong><%= tournamentItem.name %></strong><br>
+      <strong>Tournament Date : <%= tournamentItem.tournamentDate %></strong><br>
       <strong>
-      Tournament Name : <%= tournamentItem.name %></strong><br>
+      Prize Money : $ <%= tournamentItem.prizeMoney %></strong><br>
       <strong>
-      Organizer : <%= tournamentItem.organizer %></strong><br>
+      No. Of Players Joined : <%= tournamentItem.totalPlayers %> / <%= tournamentItem.maxPlayers %> </strong><br>
       <a href=<%= "/tournament/" + tournamentItem._id %>>View</a>
     </li>
   <% }) %>

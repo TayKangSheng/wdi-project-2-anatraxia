@@ -1,5 +1,5 @@
 <%# FIRST PART: THE FORM %>
-<form method="post" action="/game">
+<form enctype="multipart/form-data" method="post" action="/game">
   <div class="row">
     <h2>Add A Game</h2>
     <div class="form-group">
@@ -16,7 +16,7 @@
     </div>
     <div class="form-group">
       <label for="gameCover">Game Cover:</label>
-      <input type="text" class="form-control" name="gameCover" id="gameCover" placeholder="Game Cover URL">
+      <input type="file" class="form-control" name="gameCover" id="gameCover" placeholder="Game Cover URL">
     </div>
     <div class="form-group ">
       <button type="submit" class="btn btn-default">Add a Game</button>

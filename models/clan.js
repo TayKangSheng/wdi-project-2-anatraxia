@@ -5,7 +5,7 @@ var clanSchema = new mongoose.Schema({
   clanBanner: {type: String, required: [ true, "Please fill up the clan's banner"]},
   clanLeaderId: { type: mongoose.Schema.Types.ObjectId, ref: 'Player' },
   clanMembers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Player' }],
-  gamePlayed: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Game' }]
+  gamePlayed: { type: mongoose.Schema.Types.ObjectId, ref: 'Game' }
 })
 clanSchema.virtual('totalMembers').get(function () {
   return this.clanMembers.length

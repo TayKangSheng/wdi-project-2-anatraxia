@@ -9,36 +9,45 @@
     <span class="glyphicon-class"><strong>Clan Leader : </strong><%=clanInfo.clanLeaderId.name %></span><br>
     <span class="glyphicon-class"><strong>Clan Leader's Contact : </strong><%=clanInfo.clanLeaderId.mobile %></span><br>
     <ul class="list-group">
-    <span class="glyphicon-class"><strong>Focus Games : </strong>
-    <% clanInfo.gamePlayed.forEach(function(gameItem) {%>
+    <span class="glyphicon-class"><strong>Focus Game : </strong>
       <li class="list-group-item">
-      <%=gameItem.name%>
+      <img src=<%= clanInfo.gamePlayed.gameCover %> width=50><br>
+      <%=clanInfo.gamePlayed.name %>
       </li>
-    <%})%>
     </ul>
     <ul class="list-group">
     <span class="glyphicon-class"><strong>Member List : </strong>
+      <%var isMember=false%>
     <% clanInfo.clanMembers.forEach(function(memberItem) {%>
       <li class="list-group-item">
+      <img src=<%= "https://api.adorable.io/avatars/100/" +memberItem.id %> width=50>
       <%=memberItem.name%>
+      <a class="btn btn-link" href=<%= "/player/show/" + memberItem._id %>>View</a>
       </li>
+        <%if(user.id == memberItem._id) { %>
+          <%isMember=true%>
+        <% } %>
     <%})%>
     </ul>
   <div class="btn-group" role="group">
     <span>
-  <%if (isAuthenticated && user.id!=clanInfo.clanLeaderId._id) { %>
+  <%if (isAuthenticated && !isMember) { %>
   <form class="addMemberForm "method="POST" action=<%= "/clan/AddMember/" + clanInfo._id + "?_method=PUT" %>>
     <input type="hidden" class="form-control" name="playerID" id="playerID" value="<%= user.id %>">
     <button type="submit" class="btn btn-primary">Join Clan</button>
   </form>
-  <%} else if (isAuthenticated && user.id==clanInfo.clanLeaderId._id) {%>
+  <%} else if (isAuthenticated && user.id==clanInfo.clanLeaderId.id) {%>
   <a class="btn btn-warning" href=<%= "/clan/" + clanInfo._id + "/edit" %>>Edit Clan Details</a>
   <form class="deleteForm "method="POST" action=<%= "/clan/" + clanInfo._id + "?_method=DELETE" %>>
     <button type="submit" class="btn btn-danger">Remove Clan</button>
   </form>
-  <%} else {%>
-      <a class="btn btn-primary" href="/clan">Back to Clan List</a>
+  <%} else if (isAuthenticated && isMember && user.id!=clanInfo.clanLeaderId.id) {%>
+    <form class="removeMemberForm "method="POST" action=<%= "/clan/KickMember/" + clanInfo._id + "?_method=PUT" %>>
+      <input type="hidden" class="form-control" name="playerID" id="playerID" value="<%= user.id %>">
+      <button type="submit" class="btn btn-warning">Leave Clan</button>
+    </form>
   <%}%>
+  <a class="btn btn-primary" href="/clan">Back to Clan List</a>
   </span>
     </div>
   </div>

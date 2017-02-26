@@ -1,0 +1,38 @@
+<div class="container">
+  <h1 class="page-header">Tournament Hosted</h1>
+  <ul class="list-group">
+  <% tournaments.forEach(function (tournamentItem) { %>
+    <%if(user.id == tournamentItem.organizer) { %>
+        <li class="list-group-item">
+        <strong><%= tournamentItem.name %></strong><br>
+        <strong>Tournament Date : <%= tournamentItem.tournamentDate %></strong><br>
+        <strong>
+        Prize Money : $ <%= tournamentItem.prizeMoney %></strong><br>
+        <strong>
+        No. Of Players Joined : <%= tournamentItem.totalPlayers %> /
+        <%= tournamentItem.maxPlayers %> </strong><br>
+        <a href=<%= "/tournament/" + tournamentItem._id %>>View</a>
+        </li>
+      <% } %>
+  <% }) %>
+
+<h1 class="page-header">Tournament Joined</h1>
+  <ul class="list-group">
+  <% tournaments.forEach(function (tournamentItem) { %>
+    <% tournamentItem.playerJoined.forEach(function (tournament) { %>
+      <%if(user.id == tournament) { %>
+        <li class="list-group-item">
+        <strong><%= tournamentItem.name %></strong><br>
+        <strong>Tournament Date : <%= tournamentItem.tournamentDate %></strong><br>
+        <strong>
+        Prize Money : $ <%= tournamentItem.prizeMoney %></strong><br>
+        <strong>
+        No. Of Players Joined : <%= tournamentItem.totalPlayers %> /
+        <%= tournamentItem.maxPlayers %> </strong><br>
+        <a href=<%= "/tournament/" + tournamentItem._id %>>View</a>
+        </li>
+      <% } %>
+    <% }) %>
+  <% }) %>
+</ul>
+</div>

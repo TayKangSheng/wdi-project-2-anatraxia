@@ -1,0 +1,5 @@
+<form enctype="multipart/form-data" action="/player/UploadAvatar" <%= "/player/UploadAvatar/" + user.id + "?_method=PUT" %>method="POST">
+  <label for="myAvatar">Select Avatar Pic to Upload:</label>
+  <input type="file" name="myAvatar">
+  <input type="submit" class="btn btn-primary">
+</form>

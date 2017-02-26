@@ -1,38 +1,25 @@
 <div class="container">
-  <h1 class="page-header">Edit Club</h1>
-  <form action=<%= "/club/" + clubItem._id + "?_method=PUT" %> method="POST">
+  <h1 class="page-header">Edit Clan</h1>
+  <form enctype="multipart/form-data" action=<%= "/clan/" + clanItem._id + "?_method=PUT" %> method="POST">
     <div class="form-group">
       <label for="Name">Name :</label>
-      <input type="text" name="name" class="form-control" id="nameInput" value="<%= clubItem.name %>">
+      <input type="text" name="name" class="form-control" id="nameInput" value="<%= clanItem.name %>">
     </div>
     <div class="form-group">
-      <label for="Name">Team Badge:</label>
-      <input type="text" name="teamBadge" class="form-control" id="teamBadgeInput" value="<%= clubItem.teamBadge %>">
+      <label for="Name">Clan Banner:</label>
+      <input type="file" class="form-control" name="clanBanner" id="clanBanner" placeholder="URL for Clan Banner">
     </div>
     <div class="form-group">
-      <label for="Name">Manager's name:</label>
-      <input type="text" name="managerName" class="form-control" id="managerName" value="<%= clubItem.manager.name %>">
-    </div>
-    <div class="form-group">
-      <label for="Name">Manager's email:</label>
-      <input type="text" name="managerEmail" class="form-control" id="managerEmail" value="<%= clubItem.manager.email %>">
-    </div>
-    <div class="form-group">
-      <label for="Name">Manager's mobile:</label>
-      <input type="text" name="managerMobile" class="form-control" id="managerMobile" value="<%= clubItem.manager.mobile %>">
-    </div>
-    <div class="form-group">
-      <label for="League">League:</label>
-      <% leagues.forEach(league => {%>
-        <div class="checkbox">
+      <label for="gamePlayed">Game Played:</label>
+      <% games.forEach(game => {%>
+        <div class="radio">
         <label>
-        <input type="checkbox" name="leaguePlaying[<%= league.id%>]">
-        <%=league.name%>
+        <input type="radio" name="gamePlayed" value="<%= game.id%>">
+        <%=game.name%>
         </label>
         </div>
         <%})%>
     </div>
-
     <button type="submit" class="btn btn-default">Submit</button>
   </form>
 </div>

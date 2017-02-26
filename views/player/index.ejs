@@ -1,14 +1,18 @@
 <div class="container">
-  <h1 class="page-header">Clan List</h1>
 
+  <div class="jumbotron">
+    <h1>Hello, <%= user.name%>!</h1>
+    <p><a class="btn btn-primary btn-lg" href=<%= "/player/" + user.id + "/edit" %> role="button">Edit Profile</a></p>
+  </div>
+<h1 class="page-header">Clan List</h1>
 <ul class="list-group">
-  <% clan.forEach(function (clanItem) { %>
+  <% clans.forEach(function (clanItem) { %>
     <li class="list-group-item">
       <strong>
-      <img src=<%= clanItem.teamBadge %> width=100><br>
-      <%= clanItem.name %>: </strong><br>
-      <a class="pull-right" href=<%= "/clan/" + clanItem._id %>>Join Clan</a>
-      <a class="pull-right" href=<%= "/clan/" + clanItem._id %>>View</a>
+      <img src=<%= clanItem.clanBanner %> width=100><br>
+      <%= clanItem.name %></strong><br>
+      <strong>Total Members: </strong> <%= clanItem.totalMembers %><br>
+      <a class="btn btn-link" href=<%= "/clan/" + clanItem._id %>>View</a>
     </li>
   <% }) %>
 </ul>

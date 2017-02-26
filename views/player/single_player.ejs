@@ -1,0 +1,31 @@
+<div class="container">
+  <h1 class="page-header"></h1>
+
+  <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><img src=<%= "https://api.adorable.io/avatars/100/" +playerInfo.id %> width=50> <%= playerInfo.name %> Player Details</h3>
+  </div>
+  <div class="panel-body">
+    <span class="glyphicon-class"><strong>DOB : </strong><%=playerInfo.dob %></span><br>
+    <span class="glyphicon-class"><strong>Gender : </strong><%=playerInfo.gender %></span><br>
+    <ul class="list-group">
+    <span class="glyphicon-class"><strong>Game Played : </strong>
+    <% playerInfo.gamePlayed.forEach(function(gameItem) {%>
+      <li class="list-group-item">
+      <img src=<%= gameItem.gameCover %> width=50>
+      <%=gameItem.name%>
+      </li>
+    <%})%>
+    </ul>
+
+  <div class="btn-group" role="group">
+    <span>
+<% if (user.id == playerInfo.id) {%>
+  <a class="btn btn-primary" href=<%= "/player/" + user.id + "/edit" %> role="button">Edit Profile</a>
+  <%}%>
+  <a class="btn btn-primary" href="/">Back to Homepage</a>
+  </span>
+    </div>
+  </div>
+</div>
+</div>

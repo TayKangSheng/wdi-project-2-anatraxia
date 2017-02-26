@@ -12,6 +12,9 @@ var passport = require('passport')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+var multer = require('multer');
+var upload = multer({ dest: './uploads/' });
+var cloudinary = require('cloudinary');
 
 // mongoose.connect('mongodb://localhost/gamerKakis')
 mongoose.connect(process.env.MONGODB_URI)
@@ -56,22 +59,21 @@ app.get('/', (req, res) => {
   res.render('homepage')
 })
 
+app.use('/', require('./routes/user_routes'))
 app.use('/clan', require('./routes/clan_routes'))
 app.use('/tournament', require('./routes/tournament_routes'))
 app.use('/player', require('./routes/player_routes'))
 app.use('/game', require('./routes/game_routes'))
 
-
-
 // development error handler
 // will print stacktrace
-// if (app.get('env') === 'development') {
-//   app.use(function (err, req, res, next) {
-//     res.status(err.status || 500)
-//     console.log(err.message)
-//     res.render('error')
-//   })
-// }
+if (app.get('env') === 'development') {
+  app.use(function (err, req, res, next) {
+    res.status(err.status || 500)
+    console.log(err.message)
+    res.render('error')
+  })
+}
 
 const port = process.env.PORT || 4000
 app.listen(port, function () {

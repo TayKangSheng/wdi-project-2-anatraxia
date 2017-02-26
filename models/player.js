@@ -6,12 +6,12 @@ const emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
 var playerSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [ true, "Please fill up the player's name"]
+    required: [true, "Please fill up the player's name"]
   },
   dob: { type: Date, default: Date.now },
   gender: {
     type: String,
-    required: [ true, "Please fill up the player's gender"]
+    required: [true, "Please fill up the player's gender"]
   },
   gamePlayed: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Game' }],
   local: {
@@ -26,17 +26,9 @@ var playerSchema = new mongoose.Schema({
     }
   },
   mobile: {
-     type: Number,
-     required: [ true, "Please fill up the player's mobile no."] },
-  membership: {
     type: String,
-    enum: ['member', 'elder'],
-    default: 'member'
-  },
-  isTeamCaptain: {type: String,
-  enum: ['Yes', 'No'],
-  default: 'No'},
-  club: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Clan' }]
+    required: [true, "Please fill up the player's mobile no."]
+  }
 })
 
 playerSchema.virtual('age').get(function () {
@@ -45,12 +37,12 @@ playerSchema.virtual('age').get(function () {
   return age
 })
 
-playerSchema.statics.encrypt = function (password) {
- return bcrypt.hashSync(password, 10)
+playerSchema.statics.encrypt = function (password, salt) {
+  return bcrypt.hashSync(password, salt)
 }
 
-playerSchema.methods.validPassword = function(givenpassword){
-  return bcrypt.compareSync(givenpassword,this.local.password)
+playerSchema.methods.validPassword = function (givenpassword) {
+  return bcrypt.compareSync(givenpassword, this.local.password)
 }
 
 var Player = mongoose.model('Player', playerSchema)

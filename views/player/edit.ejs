@@ -1,0 +1,41 @@
+<div class="container">
+  <h1 class="page-header">Edit Player Details</h1>
+  <form action=<%= "/player/" + playerItem.id + "?_method=PUT" %> method="POST">
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" name="email" id="email" value="<%= playerItem.local.email %>">
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control" name="password" id="password" value="<%= playerItem.local.password %>">
+    </div>
+    <div class="form-group">
+      <label for="name">Name :</label>
+      <input type="text" name="name" class="form-control" id="name" value="<%= playerItem.name %>">
+    </div>
+    <div class="form-group">
+      <label for="dob">DOB :</label>
+      <input type="date" name="dob" class="form-control" id="dob" value="<%= playerItem.dob %>">
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender :</label>
+      <input type="text" name="gender" class="form-control" id="gender" value="<%= playerItem.gender %>">
+    </div>
+    <div class="form-group">
+      <label for="gender">Mobile :</label>
+      <input type="text" name="mobile" class="form-control" id="mobile" value="<%= playerItem.mobile %>">
+    </div>
+    <div class="form-group">
+      <label for="game">Game Played:</label>
+      <% games.forEach(game => {%>
+        <div class="checkbox">
+        <label>
+        <input type="checkbox" name="gamePlayed[<%= game.id%>]">
+        <%=game.name%>
+        </label>
+        </div>
+        <%})%>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>

@@ -7,17 +7,19 @@ var tournamentSchema = new mongoose.Schema({
   },
   venue: {type: String,
     required: [ true, "Please fill up the Tournament's venue"]},
-  time: {type: String, required: [ true, "Please fill up the Tournament's time"]},
-  startDate: {type: Date,
-    required: [ true, "Please fill up the Tournament's start date"]},
-  endDate: {type: Date,
-    required: [ true, "Please fill up the Tournament's end date"]},
+    time: {type: String, required: [ true, "Please fill up the Tournament's time"]},
+  tournamentDate: {type: Date,
+    required: [ true, "Please fill up the Tournament's date"]},
   prizeMoney: {type: Number,
     required: [ true, "Please fill up the Tournament's prize money"]},
-  maxClan: {type: Number,
-    required: [ true, "Please fill up the Tournament's max no. of clan"]},
-  game: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Game' }],
-  organizerId: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Player' }]
+  maxPlayers: {type: Number,
+    required: [ true, "Please fill up the Tournament's max no. of players"]},
+  game: { type: mongoose.Schema.Types.ObjectId, ref: 'Game' },
+  organizer: { type: mongoose.Schema.Types.ObjectId, ref: 'Player' },
+  playerJoined: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Player' }]
+})
+tournamentSchema.virtual('totalPlayers').get(function () {
+  return this.playerJoined.length
 })
 
 var Tournament = mongoose.model('Tournament', tournamentSchema)

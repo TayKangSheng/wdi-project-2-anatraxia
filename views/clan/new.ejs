@@ -1,5 +1,6 @@
 <%# FIRST PART: THE FORM %>
-<form method="post" action="/clan/new">
+<%- include('../partials/flash') %>
+<form enctype="multipart/form-data" method="post" action="/clan/new">
   <div class="row">
     <h2>Add a new Clan</h2>
     <div class="form-group">
@@ -7,16 +8,16 @@
       <input type="text" class="form-control" name="name" id="name" placeholder="Clan Name">
       </div>
       <div class="form-group">
-        <label for="clanBanner">Clan Banner:</label>
-        <input type="text" class="form-control" name="clanBanner" id="clanBanner" placeholder="URL for Clan Banner">
+        <label for="clanBanner">Select Clan Banner to upload:</label>
+        <input type="file" class="form-control" name="clanBanner" id="clanBanner" placeholder="URL for Clan Banner">
         <input type="hidden" class="form-control" name="clanLeaderId" id="clanLeaderId" value="<%= user.id %>">
       </div>
       <div class="form-group">
         <label for="gamePlayed">Game Played:</label>
         <% games.forEach(game => {%>
-          <div class="checkbox">
+          <div class="radio">
           <label>
-          <input type="checkbox" name="gamePlayed[<%= game.id%>]">
+          <input type="radio" name="gamePlayed" value="<%= game.id%>">
           <%=game.name%>
           </label>
           </div>

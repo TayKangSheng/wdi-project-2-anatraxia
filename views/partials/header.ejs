@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-custom">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -8,20 +8,63 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Gamer Kakis</a>
+      <a class="navbar-brand" href="/"><i class="fa fa-play-circle"></i><span class="light">Gamer Kakis </span></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <%if (isAuthenticated) { %>
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a href="/clan" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href=<%= "/player/" + user.id + "/edit" %>>Edit Profile</a></li>
+            </ul>
+          </li>
+        </ul>
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="/club" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Club <span class="caret"></span></a>
+          <a href="/clan" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clan <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/club">Show All Club</a></li>
-            <li><a href="/club/new">Create New Club</a></li>
+            <li><a href="/clan/ownClan">My Clan</a></li>
+            <li><a href="/clan">All Clan</a></li>
+            <li><a href="/clan/new">Create New Clan</a></li>
           </ul>
         </li>
       </ul>
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="/tournament" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tournament <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/tournament/ownTournament">My Tournament</a></li>
+            <li><a href="/tournament">All Tournament</a></li>
+            <li><a href="/tournament/new">Create New Tournament</a></li>
+          </ul>
+        </li>
+      </ul>
+      <% } %>
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="/game" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Game <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/game/">All Game</a></li>
+            <%if (isAuthenticated) { %>
+            <li><a href="/game/new">Add New Game</a></li>
+            <%}%>
+          </ul>
+        </li>
+      </ul>
+      <%if (!isAuthenticated) { %>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/signup">Sign up</a></li>
+        <li><a href="/login">Login</a></li>
+      </ul>
+    <% } else {%>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i> <span class="light"><%= user.local.email%></span></a></li>
+        <li><a href="/player/logout">Logout</a></li>
+      </ul>
+      <% } %>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

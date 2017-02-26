@@ -16,40 +16,36 @@ let tournamentController = {
     })
   },
 
-  listOne: (req, res) => {
-    Tournament.findById(req.params.id, (err, tournamentItem) => {
+  show: (req, res) => {
+    Tournament.findById(req.params.id)
+    .populate('organizer')
+    .populate('playerJoined')
+    .populate('game')
+    .exec((err, tournamentItem) => {
       if (err) throw err
       res.render('tournament/single_tournament', { tournamentItem: tournamentItem })
     })
   },
 
-  show: (req, res) => {
-    Tournament.findById(req.params.id)
-    .exec((err, tournamentInfo) => {
+  showOwn: (req, res) => {
+    Tournament.find({}, (err, tournaments) => {
       if (err) throw err
-      res.render('tournament/show', { tournamentInfo: tournamentInfo })
+      res.render('tournament/ownTournament', { tournaments: tournaments })
     })
   },
 
   create: (req, res) => {
-    var arrOfChosenIds = []
-    for (var id in req.body.game) {
-      arrOfChosenIds.push(id)
-    }
     Tournament.create({
       name: req.body.name,
       venue: req.body.venue,
       time: req.body.time,
-      startDate: req.body.startDate,
-      endDate: req.body.endDate,
+      tournamentDate: req.body.tournamentDate,
       prizeMoney: Number(req.body.prizeMoney),
-      maxClub: Number(req.body.maxClub),
-      game: arrOfChosenIds,
-      organizer: req.body.organizer,
-      organizerEmail: req.body.organizerEmail,
-      organizerContact: req.body.organizerContact
+      maxPlayers: Number(req.body.maxPlayers),
+      game: req.body.game,
+      organizer: req.body.organizerId
     }, function (err, group) {
-      if (err) throw err
+      if (err) console.log(err)
       res.redirect('/tournament')
     })
   },
@@ -73,18 +69,36 @@ let tournamentController = {
       name: req.body.name,
       venue: req.body.venue,
       time: req.body.time,
-      startDate: req.body.startDate,
-      endDate: req.body.endDate,
+      tournamentDate: req.body.tournamentDate,
       prizeMoney: Number(req.body.prizeMoney),
-      maxClub: Number(req.body.maxClub),
-      game: arrOfChosenIds,
-      organizer: req.body.organizer,
-      organizerEmail: req.body.organizerEmail,
-      organizerContact: req.body.organizerContact
+      maxPlayers: Number(req.body.maxPlayers),
+      game: req.body.game
     }, (err, tournamentUpdated) => {
       if (err) throw err
       res.redirect('/tournament/' + tournamentUpdated.id)
     })
+  },
+  addPlayer:(req, res) => {
+    Tournament.findByIdAndUpdate(req.params.id, {
+      $push: {
+        playerJoined : req.body.playerID
+      }
+    },(err, tournamentItem) => {
+    if (err) throw err
+            res.redirect('/tournament/' + tournamentItem.id)
+    })
+
+  },
+  removePlayer:(req, res) => {
+    Tournament.findByIdAndUpdate(req.params.id, {
+      $pull: {
+        playerJoined : req.body.playerID
+      }
+    },(err, tournamentItem) => {
+    if (err) throw err
+            res.redirect('/tournament/' + tournamentItem.id)
+    })
+
   },
 
   delete: (req, res) => {

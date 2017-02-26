@@ -1,4 +1,5 @@
 let Game = require('../models/game')
+var cloudinary = require('cloudinary')
 
 let gameController = {
   list: (req, res) => {
@@ -13,16 +14,17 @@ let gameController = {
   },
 
   create: (req, res) => {
-    Game.create({
-      name: req.body.name,
-      type: req.body.type,
-      publisher: req.body.publisher,
-      gameCover: req.body.gameCover
-    }, function (err, group) {
-      if (err) throw err
-      res.redirect('/game')
+    cloudinary.uploader.upload(req.file.path, function (result) {
+      Game.create({
+        name: req.body.name,
+        type: req.body.type,
+        publisher: req.body.publisher,
+        gameCover: result.secure_url
+      }, function (err, group) {
+        if (err) throw err
+        res.redirect('/game')
+      })
     })
   }
-
 }
 module.exports = gameController

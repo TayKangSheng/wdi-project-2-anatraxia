@@ -1,0 +1,20 @@
+<div class="container">
+  <h1 class="page-header">My Clan</h1>
+
+<ul class="list-group">
+  <% clans.forEach(function (clanItem) { %>
+    <% clanItem.clanMembers.forEach(function (clanMem) { %>
+      <%if(user.id == clanMem) { %>
+        <li class="list-group-item">
+        <strong>
+        <img src=<%= clanItem.clanBanner %> width=100><br>
+        <%= clanItem.name %></strong><br>
+        <strong>Total Members: </strong> <%= clanItem.totalMembers %><br>
+        <a class="btn btn-link" href=<%= "/clan/" + clanItem._id %>>View</a>
+        </li>
+        <%}%>
+    <% }) %>
+  <% }) %>
+</ul>
+
+</div>
