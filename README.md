@@ -1,66 +1,56 @@
-# Your Project Name
+# Gamer Kakis
 
-This is the starter code for WDI projects. Please update this README file with information specific to your project. Replace this paragraph for instance, with a short description of your project. Then update the sections below. Refer to your project specificaion for instructions on how to submit your projects.
+This is a website to connect all gamers together and to allow gamers to set-up or join gamer clans. This web site allow gamers to create tournament for other gamers to join.
+
 
 ## Getting Started
 
-Provide instructions here about how to get your project running on our local machine. Do we just need to clone and open a certain file or do we need to install anything first.
-
+Please clone the project via the following [link] (https://github.com/wdi-sg/wdi-project-2-anatraxia)
+and run npm install
 ### Prerequisites
 
-What is needed to install and run the project, how do we install them
+Please install the following packages:
+bcrypt
+body-parser
+cloudinary
+connect-flash
+connect-mongo
+cookie-parser
+dotenv
+ejs
+express
+express-ejs-layouts
+express-session
+method-override
+mongoose
+morgan
+multer
+nodemon
+passport
+passport-local
+path
 
-```
-Code example
-```
-
-### How to Use
-
-A step by step guide on how to install and use the project, for example if this is a game, how do we play it.
-
-
-```
-Code example
-```
-
-More steps...
-
-```
-until finished
-```
-
-
-## Tests
-
-Did you write automated tests? If so, how do we run them.
-
-
-```
-Code example
-```
 
 ## Live Version
 
-Where is this deployed online (github pages, heroku etc), give us the link and any access details we need.
 
-[Heroku link](https://rocky-garden-11645.herokuapp.com/player/login)
+[Heroku link](https://rocky-garden-11645.herokuapp.com/)
 
 ## Built With
 
-What did you use to build it, list the technologies, plugins, gems, packages etc.
 
-* [jQuery](http://jquery.com/) - jQuery for example is something you likely used
+* [jQuery](http://jquery.com/)
+* [cloudinary](http://cloudinary.com/)
+* [Bootstrap](http://getbootstrap.com/)
+* [Grayscale Theme](https://blackrockdigital.github.io/startbootstrap-grayscale/)
+* [Adorable Avatars](http://avatars.adorable.io/#what)
+* [Heroku](https://dashboard.heroku.com/apps)
+* [mLab](https://mlab.com/)
 
-## Workflow
-
-Did you write user stories, draw wireframes, use task tracking, produce ERDs? Did you use source control, with regular commits? Include links to them here.
-
-## Authors
-
-Did you collaborate with others on this project, list them here
-
-* **John McClain** - *Responsible for keeping vests white* - [GithubUserName](https://github.com/GithubUserName)
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used, for example [this was a useful starting point for creating this template](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2).
+* Prima
+* Kang Sheng
+* Jeremiah
+* WDI 8
