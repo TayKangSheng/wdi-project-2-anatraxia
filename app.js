@@ -12,9 +12,9 @@ var passport = require('passport')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
-var multer = require('multer');
-var upload = multer({ dest: './uploads/' });
-var cloudinary = require('cloudinary');
+var multer = require('multer')
+var upload = multer({ dest: './uploads/' })
+var cloudinary = require('cloudinary')
 
 // mongoose.connect('mongodb://localhost/gamerKakis')
 mongoose.connect(process.env.MONGODB_URI)
@@ -55,14 +55,27 @@ app.use(function (req, res, next) {
   next()
 })
 
+function isAuthenticated(req, res, next) {
+
+    // do any checks you want to in here
+
+    // CHECK THE USER STORED IN SESSION FOR A CUSTOM VARIABLE
+    // you can do this however you want with whatever variables you set up
+    if (req.user.authenticated)
+        return next();
+
+    // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SOMEWHERE
+    res.redirect('/');
+}
+
 app.get('/', (req, res) => {
   res.render('homepage')
 })
 
 app.use('/', require('./routes/user_routes'))
-app.use('/clan', require('./routes/clan_routes'))
-app.use('/tournament', require('./routes/tournament_routes'))
-app.use('/player', require('./routes/player_routes'))
+app.use('/clan', isAuthenticated ,require('./routes/clan_routes'))
+app.use('/tournament', isAuthenticated ,require('./routes/tournament_routes'))
+app.use('/player', isAuthenticated ,require('./routes/player_routes'))
 app.use('/game', require('./routes/game_routes'))
 
 // development error handler
