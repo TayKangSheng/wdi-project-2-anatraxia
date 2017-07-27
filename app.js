@@ -75,7 +75,7 @@ app.get('/', (req, res) => {
 app.use('/', require('./routes/user_routes'))
 app.use('/clan', isAuthenticated ,require('./routes/clan_routes'))
 app.use('/tournament', isAuthenticated ,require('./routes/tournament_routes'))
-app.use('/player', isAuthenticated ,require('./routes/player_routes'))
+app.use('/player',require('./routes/player_routes'))
 app.use('/game', require('./routes/game_routes'))
 
 // development error handler
